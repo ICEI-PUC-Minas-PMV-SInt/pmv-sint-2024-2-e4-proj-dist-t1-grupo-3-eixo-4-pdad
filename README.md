@@ -1,15 +1,14 @@
-> Identifique o produto que será construído. Para isso, nomeie-o da seguinte forma: imagine o produto em uma caixa, qual nome estaria 
-> escrito nela?
-# ToDoZ
 
-# Visão do Produto
-> Ter uma visão clara do produto é essencial para entender como as primeiras peças do quebra-cabeça do seu negócio se encaixarão. Essa
-> visão deve capturar a essência do valor que seu negócio oferece e transmitir uma mensagem clara e cativante para seus clientes. 
-> Utilize o seguinte modelo para criar a visão do seu produto:
+# Litera Talk
 
-> Para [o nome do cliente final], cujo [o problema que precisa ser resolvido]. O [o nome do produto] é [a categoria do produto] que [o benefício-chave, razão para adquiri-lo]. Diferentemente de [alternativa da concorrência], o nosso produto [a diferença-chave].
 
-Para freelancers que trabalham em diversos projetos, cujo desafio é gerenciar tarefas, priorizar atividades, manter o foco e medir o custo de cada projeto com precisão. O ToDoZ é um software de gerenciamento de tarefas e tempo baseado na técnica de pomodoro e método de Eisenhower, que melhora a concentração, aumenta a produtividade e permite um melhor planejamento financeiro. Diferentemente de outras opções no mercado, nosso produto oferece uma solução completa e eficiente para o dia a dia do freelancer.
+# Sobre
+
+Para leitores que desejam se aprofundar em obras literárias e enfrentam o desafio de encontrar um espaço organizado para reuniões e registros de ideias, o Litera Talk é a solução ideal. Nossa plataforma de debates literários oferece um ambiente interativo onde você pode se conectar com amigos ou outros leitores com gostos semelhantes e explorar diferentes pontos de vista.
+
+No Litera Talk, você pode organizar debates por gêneros, autores ou títulos, facilitando a troca de insights e enriquecendo sua experiência de leitura. Além disso, nossa plataforma se destaca ao oferecer bonificações por contribuições e participações, incentivando um engajamento contínuo. Para tornar a experiência ainda mais especial, promovemos encontros com autores convidados.
+
+Diferente de outras plataformas de leitura, o Litera Talk combina organização eficiente com oportunidades únicas de interação, promovendo uma experiência fascinante.
 
 
 ## Etapa 1: Requisitos do produto
