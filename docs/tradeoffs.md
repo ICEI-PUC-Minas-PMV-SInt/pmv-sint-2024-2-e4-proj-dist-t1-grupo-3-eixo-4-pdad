@@ -1,5 +1,6 @@
 # Trade-offs de Características de Qualidade
 
+FURPS+ é um sistema para a classificação de requisitos, o acrônimo representa categorias que podem ser usadas na definição de requisitos, assim como representa atributos de Qualidade de Software.
 As categorias de requisitos não-funcionais para o produto de software "FocusFlow", conforme o modelo FURPS+, seriam:
 
 1. **Usabilidade**: 
