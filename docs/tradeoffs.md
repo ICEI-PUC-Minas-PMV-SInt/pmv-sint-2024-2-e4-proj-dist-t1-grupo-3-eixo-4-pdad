@@ -6,7 +6,7 @@ O modelo FURPS+ fornece uma estrutura para categorizar os requisitos não-funcio
 
 As categorias de requisitos não-funcionais para o produto de software "FocusFlow", conforme o modelo FURPS+, seriam:
 
-1. **Usabilidade (Usability):**: 
+1. **Usabilidade (Usability):** 
    
    É o atributo que avalia a interface com o usuário. Possui diversas subcategorias, entre elas: prevenção de erros; estética e design; ajudas (Help) e documentação; consistência e padrões.
 
