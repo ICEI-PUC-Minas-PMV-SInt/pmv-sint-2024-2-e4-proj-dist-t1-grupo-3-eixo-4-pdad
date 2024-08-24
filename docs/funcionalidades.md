@@ -51,11 +51,11 @@
 
 | Funcionalidades | Bárbara | Pedro | Mariana |
 |-----------------|--------------|-----------------|
-| Criação e Gestão de Clubes Literários | Sim | - |  |
-| Agendamento de Encontros Síncronos | Sim | - |  |
-| Compartilhamento de Resenhas e Materiais | Sim | - |  |
+| Criação e Gestão de Clubes Literários | Sim | - | - |
+| Agendamento de Encontros Síncronos | Sim | - | - |
+| Compartilhamento de Resenhas e Materiais | Sim | - | - |
 | Promoção de Eventos Literários | Sim | Sim | Sim |
-| Criação e Gerenciamento de Eventos Locais |  - | Sim | Sim |
+| Criação e Gerenciamento de Eventos Locais | - | Sim | Sim |
 | Divulgação e Marketing de Eventos | - | Sim | Sim |
 | Feedback e Avaliação de Eventos | - | Sim | Sim |
 | Sistema de Bonificações e Recompensas | - | - | Sim |
