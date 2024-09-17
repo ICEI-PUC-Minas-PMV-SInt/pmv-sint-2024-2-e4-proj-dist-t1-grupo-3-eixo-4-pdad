@@ -7,10 +7,11 @@
 
 | Endpoint                             | Método | Descrição                                      | Parâmetros                        | Formato da Resposta | Autenticação e Autorização |
 |--------------------------------------|--------|------------------------------------------------|-----------------------------------|---------------------|----------------------------|
-| /api/users/{user_id}/tasks/          | GET    | Obter todas as tarefas cadastradas             | user_id (string)                  | JSON                | JWT Token                  |
-| /api/users/{user_id}/tasks/{task_id} | POST   | Criar uma nova tarefa                          | user_id (string) task_id (string) | JSON                | JWT Token                  |
-| /api/users/{user_id}/tasks/{task_id} | GET    | Obter detalhes de uma tarefa específica        | user_id (string) task_id (string) | JSON                | JWT Token                  |
-| /api/users/{user_id}/tasks/{task_id} | PUT    | Atualizar os detalhes de uma tarefa específica | user_id (string) task_id (string) | JSON                | JWT Token                  |
-| /api/users/{user_id}/tasks/{task_id} | DELETE | Excluir uma tarefa específica                  | user_id (string) task_id (string) | JSON                | JWT Token                  |
+| /api/Autor/ListarAutores          | GET    | Listar todos os autores             | -                  | JSON                | JWT Token                  |
+| /api/Autor/BuscarAutorPorId/{idAutor}          | GET    | Buscar um autor por ID             | idAutor (int)                  | JSON                | JWT Token                  |
+| /api/Autor/BuscarAutorPorIdLivro/{idLivro} | GET   | Buscar um autor por ID de livro                          | idLivro (int) task_id (string) | JSON                | JWT Token                  |
+| /api/Autor/CriarAutor | POST    | Criar um novo autor        | - | JSON                | JWT Token                  |
+| /api/Autor/EditarAutor | PUT    | Atualizar os dados de um autor | idAutor (string) | JSON                | JWT Token                  |
+| /api/Autor/ExcluirAutor | DELETE | Excluir um autor                  | idAutor (int) | JSON                | JWT Token                  |
 
 [Retorna](../README.md)
