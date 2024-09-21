@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using todoz.api.Data;
+using todoz.api.DTO.Autor;
 using todoz.api.Models;
 
 namespace todoz.api.Services.Autor
@@ -10,9 +11,62 @@ namespace todoz.api.Services.Autor
         public AutorService(AppDbContext context) { 
             _context = context;
         }
-        public Task<ResponseModel<AutorModel>> BuscarAutorPorI(int idAutor)
+        public async Task<ResponseModel<AutorModel>> BuscarAutorPorId(int idAutor)
+
         {
-            throw new NotImplementedException();
+            ResponseModel<AutorModel> response = new ResponseModel<AutorModel>();
+            try
+            {
+                var autor = await _context.Autores.FirstOrDefaultAsync(autorBanco => autorBanco.Id == idAutor);
+
+                if (autor == null)
+                {
+                    response.Mensagem = "Nenhum Registro Encontrado";
+                    return response;
+                }
+
+                response.Dados = autor;
+                response.Mensagem = "Autor Localizado";
+                return response;
+           
+
+            }catch (Exception ex)
+            {
+                response.Mensagem = ex.Message;
+                response.Status = false;
+                return response;
+            }
+        }
+
+        public async Task<ResponseModel<List<AutorModel>>> CadastrarAutor(AutorCriacaoDTO autorCriacaoDTO)
+        {
+            ResponseModel<List<AutorModel>> response = new ResponseModel<List<AutorModel>>();
+            try
+            {
+
+                var autor = new AutorModel()
+                {
+                    NomeCompleto = autorCriacaoDTO.NomeCompleto,
+                    DataNascimento = autorCriacaoDTO.DataNascimento,
+                    Nacionalidade = autorCriacaoDTO.Nacionalidade,
+                    Biografia = autorCriacaoDTO.Biografia
+                };
+
+                _context.Add(autor);
+
+                await _context.SaveChangesAsync();
+
+                response.Dados = await _context.Autores.ToListAsync();
+                response.Mensagem = "Autor cadastrado com sucesso!";
+                return response;
+
+                
+            }
+            catch (Exception ex) {
+                response.Mensagem = ex.Message;
+                response.Status = false;
+                return response;
+            }
         }
 
         public async Task<ResponseModel<List<AutorModel>>> ListarAutores()
