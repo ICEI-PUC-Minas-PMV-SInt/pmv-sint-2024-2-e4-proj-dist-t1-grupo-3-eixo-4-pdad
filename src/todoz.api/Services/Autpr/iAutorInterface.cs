@@ -10,5 +10,8 @@ namespace todoz.api.Services.Autor
 
         Task<ResponseModel<List<AutorModel>>> CadastrarAutor(AutorCriacaoDTO autorCriacaoDTO);
 
+        Task<ResponseModel<List<AutorModel>>> EditarAutor(AutorEdicaoDTO autorEdicaoDTO);
+        Task<ResponseModel<List<AutorModel>>> ExcluirAutor(int idAutor);
+
     }
 }

@@ -30,11 +30,28 @@ namespace todoz.api.Controllers
         }
 
         [HttpPost("CadastrarAutor")]
-        public async Task<ActionResult<ResponseModel<AutorModel>>> CadastrarAutor(AutorCriacaoDTO autorCriacaoDTO)
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> CadastrarAutor(AutorCriacaoDTO autorCriacaoDTO)
         {
             var autores = await _autorInterface.CadastrarAutor(autorCriacaoDTO);
             return Ok(autores);
            
+        }
+
+        [HttpPut("EditarAutor")]
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> EditarAutor(AutorEdicaoDTO autorEdicaoDTO)
+        {
+            var autores = await _autorInterface.EditarAutor(autorEdicaoDTO);
+            return Ok(autores);
+
+        }
+
+        [HttpDelete("ExcluirAutor")]
+
+        public async Task<ActionResult<ResponseModel<List<AutorModel>>>> ExcluirAutor(int idAutor)
+        {
+            var autores = await _autorInterface.ExcluirAutor(idAutor);
+            return Ok(autores);
+
         }
     }
 }
