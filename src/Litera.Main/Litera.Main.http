@@ -1,0 +1,6 @@
+@Litera.Main_HostAddress = http://localhost:5233
+
+GET {{Litera.Main_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
