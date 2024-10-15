@@ -5,17 +5,17 @@ using Litera.Main.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Banco de dados para desenvolvimento
 builder.Services.AddDevelopmentDatabaseService();
 
-// Controladores
+// Controladores e suporte para Razor Pages
 builder.Services.AddControllers();
+builder.Services.AddRazorPages(); // Adicionando suporte para Razor Pages
 
-// Injeção para repositóridos do DB
+// Injeção para repositórios do DB
 builder.Services.AddScoped<ILiteraRepository<AutorModel>, AutorRepository>();
 
 var app = builder.Build();
@@ -29,5 +29,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
+app.MapRazorPages();
 
 app.Run();
