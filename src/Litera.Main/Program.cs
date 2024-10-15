@@ -44,8 +44,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
+app.UseAuthorization();
+
+//app.UseHttpsRedirection();
 app.MapControllers();
-app.MapRazorPages();
+
 
 app.Run();
