@@ -1,4 +1,15 @@
+using DotNetEnv;
+using System.ComponentModel;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+string solutionRoot = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+Env.Load(Path.Combine(solutionRoot, ".env"));
+
+var apiUrl = Environment.GetEnvironmentVariable("API_URL") ?? "http://localhost:5233";
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();
