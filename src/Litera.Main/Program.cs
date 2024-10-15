@@ -1,8 +1,25 @@
 using Litera.Main.Infrastructure.Database;
 using Litera.Main.Models;
 using Litera.Main.Repositories;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string? solutionRoot = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+Env.Load(Path.Combine(solutionRoot, ".env"));
+
+
+var frontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "http://localhost:5160";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", builder =>
+    {
+        builder.WithOrigins(frontendUrl)
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
