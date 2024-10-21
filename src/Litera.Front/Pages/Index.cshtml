@@ -1,0 +1,140 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    var apiURl = (string)ViewData["ApiUrl"];
+}
+
+<h1>Autores</h1>
+
+<div class="container mb-3">
+    <form id="autor-form" onsubmit="event.preventDefault(); salvarAutor();">
+        <input type="hidden" id="autor-id">
+        <div class="mb-3">
+            <label for="nomeCompleto" class="form-label">Nome Completo</label>
+            <input type="text" class="form-control" id="nomeCompleto" placeholder="Digite o nome Completo" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+            <input type="date" class="form-control" id="dataNascimento" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="nacionalidade" class="form-label">Nacionalidade</label>
+            <input type="text" class="form-control" id="nacionalidade" placeholder="Digite a nacionalidade" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="biografia" class="form-label">Biografia</label>
+            <textarea class="form-control" id="biografia" rows="3" placeholder="Escreva uma breve biografia"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+</div>
+
+<div class="container">
+    <table class="table table-striped" id="tabela-autores">
+        <thead>
+            <tr>
+                <th>Nome Completo</th>
+                <th>Nacionalidade</th>
+                <th>Data de Nascimento</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script>
+    const apiUrl = `@(apiURl)`;
+
+    async function fetchAutores() {
+        try {
+            const response = await fetch(`${apiUrl}/api/Autores`);
+            if (!response.ok) {
+                throw new Error('Erro ao buscar autores');
+            }
+            const autores = await response.json();
+            console.log("Autores:", autores);
+
+            const tabelaAutores = document.querySelector("#tabela-autores tbody");
+            tabelaAutores.innerHTML = "";
+
+            autores.forEach(autor => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                        <td>${autor.nomeCompleto}</td>
+                        <td>${autor.nacionalidade}</td>
+                        <td>${new Date(autor.dataNascimento).toLocaleDateString()}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" onclick="editarAutor(${autor.id})">Editar</button>
+                            <button class="btn btn-sm btn-danger" onclick="deletarAutor(${autor.id})">Deletar</button>
+                        </td>
+                    `;
+                tabelaAutores.appendChild(tr);
+            });
+        } catch (error) {
+            console.error("Erro ao buscar autores:", error);
+        }
+    }
+
+    async function salvarAutor() {
+        try {
+            const id = document.getElementById("autor-id").value;
+            const nomeCompleto = document.getElementById("nomeCompleto").value;
+            const dataNascimento = document.getElementById("dataNascimento").value;
+            const nacionalidade = document.getElementById("nacionalidade").value;
+            const biografia = document.getElementById("biografia").value;
+
+            const autor = { nomeCompleto, dataNascimento, nacionalidade, biografia };
+
+            const options = {
+                method: id ? "PUT" : "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id ? parseInt(id) : undefined, ...autor })
+            };
+
+            await fetch(`${apiUrl}/api/Autores${id ? `/${id}` : ''}`, options);
+
+            // Limpar os campos do formulário
+            document.getElementById("autor-form").reset();
+            document.getElementById("autor-id").value = '';
+
+            fetchAutores();
+        } catch (error) {
+            console.error("Erro ao salvar o autor:", error);
+        }
+    }
+
+    async function editarAutor(id) {
+        try {
+            const response = await fetch(`${apiUrl}/api/Autores/${id}`);
+            if (!response.ok) {
+                throw new Error('Erro ao buscar autor');
+            }
+            const autor = await response.json();
+
+            document.getElementById("autor-id").value = autor.id;
+            document.getElementById("nomeCompleto").value = autor.nomeCompleto;
+            document.getElementById("dataNascimento").value = autor.dataNascimento;
+            document.getElementById("nacionalidade").value = autor.nacionalidade;
+            document.getElementById("biografia").value = autor.biografia;
+        } catch (error) {
+            console.error("Erro ao editar autor:", error);
+        }
+    }
+
+    async function deletarAutor(id) {
+        try {
+            await fetch(`${apiUrl}/api/Autores/${id}`, { method: "DELETE" });
+            fetchAutores();
+        } catch (error) {
+            console.error("Erro ao deletar autor:", error);
+        }
+    }
+
+    window.onload = fetchAutores;
+</script>
