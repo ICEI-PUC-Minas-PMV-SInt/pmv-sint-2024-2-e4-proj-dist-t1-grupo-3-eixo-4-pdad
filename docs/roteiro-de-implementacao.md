@@ -14,11 +14,11 @@
 * Principais funções:
   - **`fetchAutores`**: lista os autores.
   - **`salvarAutor`**: cria ou edita autores.
-  - **`editarAutor`**: preenche o formulário com os dados do autor selecionado.
+  - **`editarAutor`**: preenche os campos e permite a alteração.
   - **`deletarAutor`**: remove registros de autores.
 
 # Atendendo às Exigências:
 * As APIs foram implementadas em C# usando o framework .NET Core.
 * A comunicação entre front-end e back-end é realizada via API REST para conteúdo dinâmico.
 * Os dados são armazenados em um banco de dados, utilizando o SQLite.
-* A estrutura foi organizada em pastas separadas para o backend e frontend, conforme solicitado.
+* A estrutura foi organizada em pastas separadas para o back-end e front-end, conforme solicitado.
