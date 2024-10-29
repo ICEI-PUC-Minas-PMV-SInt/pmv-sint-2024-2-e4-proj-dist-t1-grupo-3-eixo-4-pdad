@@ -1,8 +1,6 @@
 using DotNetEnv;
 using System.ComponentModel;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 string solutionRoot = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
