@@ -2,6 +2,7 @@ using DotNetEnv;
 using Litera.Main.Infrastructure.Database;
 using Litera.Main.Models;
 using Litera.Main.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ string? solutionRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Full
 Env.Load(Path.Combine(solutionRoot, ".env"));
 
 var frontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "http://localhost:5160";
-var databaseUri = Environment.GetEnvironmentVariable("SQLSERVER_CONNECTIONSTRING") ?? null;
+var databaseUri = Environment.GetEnvironmentVariable("SQLSERVER_CONNECTIONSTRING");
 
 builder.Services.AddCors(options =>
 {
@@ -27,7 +28,22 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Banco de dados
-builder.Services.AddDatabaseService(databaseUri);
+if (!string.IsNullOrEmpty(databaseUri))
+{
+    try
+    {
+        builder.Services.AddSqlServerDatabaseService(databaseUri);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Não foi possível se conectar ao SQL Server: {ex.Message}");
+        builder.Services.AddSqliteDatabaseService();
+    }
+}
+else
+{
+    builder.Services.AddSqliteDatabaseService();
+}
 
 // Controladores e suporte para Razor Pages
 builder.Services.AddControllers();
@@ -38,10 +54,15 @@ builder.Services.AddScoped<ILiteraRepository<AutorModel>, AutorRepository>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope()) {
+ var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+ dbContext.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
+app.UseSwagger();
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
 }
 
