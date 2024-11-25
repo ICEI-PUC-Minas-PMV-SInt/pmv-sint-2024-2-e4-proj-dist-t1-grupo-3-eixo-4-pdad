@@ -7,7 +7,7 @@ namespace Litera.Front.Pages
 
         public void OnGet()
         {
-            ViewData["ApiUrl"] = Environment.GetEnvironmentVariable("API_URL") ?? "html://localhost:5233";
+            ViewData["ApiUrl"] = Environment.GetEnvironmentVariable("API_URL") ?? "http://localhost:5233";
         }
     }
 }

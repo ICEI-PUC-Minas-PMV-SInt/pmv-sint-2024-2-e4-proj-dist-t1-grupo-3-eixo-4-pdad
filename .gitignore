@@ -45,3 +45,6 @@ msbuild.wrn
 # SQLite's WAL and SHM
 *.db-shm
 *.db-wal
+
+# Secrets
+.env

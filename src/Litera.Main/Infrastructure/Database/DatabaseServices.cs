@@ -4,11 +4,21 @@ namespace Litera.Main.Infrastructure.Database;
 
 public static class DatabaseServices
 {
-    public static IServiceCollection AddDevelopmentDatabaseService(this IServiceCollection services)
+    public static IServiceCollection AddDatabaseService(
+        this IServiceCollection services,
+        string? connectionString = null
+    )
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseSqlite("Data source=LiteraDev.db");
+            if (connectionString != null)
+            {
+                options.UseSqlServer(connectionString);
+            }
+            else
+            {
+                options.UseSqlite("Data source=LiteraDev.db");
+            }
         });
 
         return services;
