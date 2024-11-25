@@ -1,5 +1,5 @@
-using DotNetEnv;
 using System.ComponentModel;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +8,19 @@ Env.Load(Path.Combine(solutionRoot, ".env"));
 
 var apiUrl = Environment.GetEnvironmentVariable("API_URL") ?? "http://localhost:5233";
 
-
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowBackend",
+        builder =>
+        {
+            builder.WithOrigins(apiUrl).AllowAnyMethod().AllowAnyHeader();
+        }
+    );
+});
 
 var app = builder.Build();
 
@@ -27,6 +37,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseCors("AllowBackend");
 app.UseAuthorization();
 
 app.MapRazorPages();
